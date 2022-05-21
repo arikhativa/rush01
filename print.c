@@ -1,33 +1,48 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   board.c                                            :+:      :+:    :+:   */
+/*   print.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yrabby <yrabby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/21 11:55:06 by yrabby            #+#    #+#             */
-/*   Updated: 2022/05/21 12:21:10 by yrabby           ###   ########.fr       */
+/*   Created: 2022/05/21 12:20:54 by yrabby            #+#    #+#             */
+/*   Updated: 2022/05/21 12:30:02 by yrabby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include <unistd.h>
 
-// ft_putchar.c
-void	ft_putchar(char c);
-
-void	fill_random(int **board)
+void	ft_putchar(char c)
 {
-	int i = 0;
-	int j;
+	write(1, &c, 1);
+}
 
-	while (i < 4)
+void	print_line(int *line, int size)
+{
+	int	i;
+
+	i = 0;
+	ft_putchar(line[i] + '0');
+	++i;
+	while (i < size)
 	{
-		j = 0;
-		while (j < 4)
-		{
-			board[i][j] = 0;
-			++j;
-		}
+		ft_putchar(' ');
+		ft_putchar(line[i] + '0');
+		++i;
+	}
+	ft_putchar('\n');
+}
+
+void	print_board_on_success(int **board, int size)
+{
+	int	i;
+
+	i = 0;
+	while (i < size)
+	{
+		print_line(board[i], size);
 		++i;
 	}
 }
+
+// TODO print on error
