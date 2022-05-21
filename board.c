@@ -1,39 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   outer_board.c                                      :+:      :+:    :+:   */
+/*   board.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yrabby <yrabby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/21 11:13:52 by yrabby            #+#    #+#             */
-/*   Updated: 2022/05/21 11:58:57 by yrabby           ###   ########.fr       */
+/*   Created: 2022/05/21 11:55:06 by yrabby            #+#    #+#             */
+/*   Updated: 2022/05/21 12:11:29 by yrabby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 
-char	*fill_line(int *line, char *input)
+void	fill_random(int **board)
 {
-	int	i;
+	int i = 0;
+	int j;
 
-	i = 0;
 	while (i < 4)
 	{
-		line[i] = *input - '0';
-		input += 2;
-		++i;
-	}
-	return (input);
-}
-
-void	parse_outer_board(int **ob, char *input)
-{
-	int	i;
-
-	i = 0;
-	while (i < 4)
-	{
-		input = fill_line(ob[i], input);
+		j = 0;
+		while (j < 4)
+		{
+			board[i][j] = 0;
+			++j;
+		}
 		++i;
 	}
 }

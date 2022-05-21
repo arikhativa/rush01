@@ -1,39 +1,49 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   outer_board.c                                      :+:      :+:    :+:   */
+/*   table.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yrabby <yrabby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/21 11:13:52 by yrabby            #+#    #+#             */
-/*   Updated: 2022/05/21 11:58:57 by yrabby           ###   ########.fr       */
+/*   Created: 2022/05/21 11:56:50 by yrabby            #+#    #+#             */
+/*   Updated: 2022/05/21 12:00:55 by yrabby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 
-char	*fill_line(int *line, char *input)
+void	free_tab(int **tab, int size)
 {
 	int	i;
 
 	i = 0;
-	while (i < 4)
+	while (i < size)
 	{
-		line[i] = *input - '0';
-		input += 2;
+		if (tab[i])
+			free(tab[i]);
 		++i;
 	}
-	return (input);
+	free(tab);
 }
 
-void	parse_outer_board(int **ob, char *input)
+int	**create_tab(int size)
 {
+	int	**tab;
 	int	i;
 
 	i = 0;
-	while (i < 4)
+	tab = (int **)malloc(sizeof(int *) * size);
+	if (!tab)
+		return (NULL);
+	while (i < size)
 	{
-		input = fill_line(ob[i], input);
+		tab[i] = (int *)malloc(sizeof(int) * size);
+		if (!tab[i])
+		{
+			free_tab(tab, i);
+			return (NULL);
+		}
 		++i;
 	}
+	return tab;
 }
